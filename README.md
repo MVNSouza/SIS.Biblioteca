@@ -1,6 +1,8 @@
 # Sistema de Biblioteca
 
-Um sistema simples de gerenciamento de biblioteca desenvolvido em Java como parte de um projeto acadêmico.
+Um sistema simples de gerenciamento de biblioteca desenvolvido em Java como parte de um projeto acadêmico.  
+> [!NOTE]  
+> Projeto ainda em andamento.
 
 ## Descrição
 
