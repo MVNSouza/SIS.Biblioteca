@@ -3,6 +3,12 @@
 Um sistema simples de gerenciamento de biblioteca desenvolvido em Java como parte de um projeto acadêmico.  
 > [!NOTE]  
 > Projeto ainda em andamento.
+### Índice
+- [Descrição](#descrição)
+- [Funcionalidades](#funcionalidades)
+- [Requisitos](#requisitos)
+- [Instalação](#instalação)
+- [Créditos](#créditos)
 
 ## Descrição
 
@@ -26,3 +32,9 @@ O Sistema de Biblioteca permite gerenciar livros, usuários e empréstimos de fo
 1. Clone o repositório:
    ```bash
    git clone https://github.com/seuusuario/sistema-biblioteca.git
+
+## Créditos
+
+- 👤 [Marcos V. N. Souza](https://github.com/MVNSouza)
+- 👤 [Kauã Sousa](https://github.com/K-thun)
+- 👤 [Luiz Henrique](https://github.com/l-Luiz-Henrique-l)
