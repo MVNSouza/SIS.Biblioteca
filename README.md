@@ -31,7 +31,7 @@ O Sistema de Biblioteca permite gerenciar livros, usuários e empréstimos de fo
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/sistema-biblioteca.git
+   git clone https://github.com/MVNSouza/SIS.biblioteca.git
 
 ## Créditos
 
