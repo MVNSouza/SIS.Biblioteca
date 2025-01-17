@@ -12,8 +12,8 @@ public class Database {
 
     public Database(){
         admin = new Funcionario("admin", "1", "123456789", "example@gmail.com");
-        Estante estanteGeral = new Estante("999");
-        Estante estanteBase = new Estante("001");
+        Estante estanteGeral = new Estante("Geral", "999");
+        Estante estanteBase = new Estante("Ficção", "001");
         estantes.add(estanteBase);
     }
 
@@ -24,21 +24,21 @@ public class Database {
     public void adicionarEmEstante(Livro livro, String codigo){
         Estante estanteCompativel = null;
         for (Estante estante : estantes) {
-            if (estante.getCodigo().equals(codigo)){
+            if (estante.getCodigoGenero().equals(codigo)){
                 estanteCompativel = estante;
                 break;
             } else {
-                estanteCompativel = new Estante("Nenhum");
+                estanteCompativel = new Estante("Nenhum", "000");
             }
             
         }
         
         String opcao = "N";
         
-        if (estanteCompativel.getCodigo().equals(codigo.substring(0, 3))){
+        if (estanteCompativel.getCodigoGenero().equals(codigo.substring(0, 3))){
             estanteCompativel.adicionarLivro(livro);
             System.out.println("Livro adicionado à estante");
-        } else if (!(estanteCompativel.getCodigo().equals(codigo.substring(0, 3)))){
+        } else if (!(estanteCompativel.getCodigoGenero().equals(codigo.substring(0, 3)))){
             System.out.print("Esse código não condiz com nenhuma estante, deseja adicionar na geral? [S / N]");
             opcao = input.next();
             if (opcao.equals("S")){

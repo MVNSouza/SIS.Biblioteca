@@ -1,12 +1,14 @@
+package classes;
+
+import java.util.ArrayList;
+
 public class Estante {
     private String genero;
-    private String titulo;
     private String codigoGenero;
-    private List<Livro> livros;
+    private ArrayList<Livro> livros;
 
-    public Estante(String genero, String titulo, String codigoGenero) {
+    public Estante(String genero, String codigoGenero) {
         this.genero = genero;
-        this.titulo = titulo;
         this.codigoGenero = codigoGenero;
         this.livros = new ArrayList<>();
     }
@@ -19,14 +21,6 @@ public class Estante {
         this.genero = genero;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
     public String getCodigoGenero() {
         return codigoGenero;
     }
@@ -35,11 +29,11 @@ public class Estante {
         this.codigoGenero = codigoGenero;
     }
 
-    public List<Livro> getLivros() {
+    public ArrayList<Livro> getLivros() {
         return livros;
     }
 
-    public void setLivros(List<Livro> livros) {
+    public void setLivros(ArrayList<Livro> livros) {
         this.livros = livros;
     }
 
@@ -73,4 +67,6 @@ public class Estante {
             }
         }
     }
+
+}
 

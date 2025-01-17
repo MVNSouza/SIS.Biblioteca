@@ -35,4 +35,8 @@ public class Livro {
         db.adicionarEmEstante(this, codigo);
     }
 
+    public String getTitulo(){
+        return titulo;
+    }
+
 }
