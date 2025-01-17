@@ -1,29 +1,76 @@
-package classes;
-import java.util.ArrayList;
-
 public class Estante {
-    public String codigo;
-    public ArrayList<Livro> livros = new ArrayList<>();
+    private String genero;
+    private String titulo;
+    private String codigoGenero;
+    private List<Livro> livros;
 
-    public Estante(String codigo){
-        this.codigo = codigo;
+    public Estante(String genero, String titulo, String codigoGenero) {
+        this.genero = genero;
+        this.titulo = titulo;
+        this.codigoGenero = codigoGenero;
+        this.livros = new ArrayList<>();
     }
 
-    public void adicionarLivro(Livro livro){
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCodigoGenero() {
+        return codigoGenero;
+    }
+
+    public void setCodigoGenero(String codigoGenero) {
+        this.codigoGenero = codigoGenero;
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+
+    public void adicionarLivro(Livro livro) {
         livros.add(livro);
-        System.out.println("Livro adicionado com sucesso.");
+        System.out.println("Livro adicionado: " + livro.getTitulo());
     }
-    public void listarLivros(){
-        int contador = 1;
-        System.out.println("Estante ["+ codigo +"]");
-        for (Livro livro : livros){
-            System.out.println("Livro" + contador );
-            livro.gerarInformação();
-            contador++;
+
+    public void removerLivro(String titulo) {
+        boolean encontrado = false;
+        for (Livro livro : livros) {
+            if (livro.getTitulo().equalsIgnoreCase(titulo)) {
+                livros.remove(livro);
+                System.out.println("Livro removido: " + titulo);
+                encontrado = true;
+                break;
+            }
         }
-        
+        if (!encontrado) {
+            System.out.println("Livro não encontrado: " + titulo);
+        }
     }
-    public String getCodigo(){
-        return codigo;
+
+    public void listarLivros() {
+        if (livros.isEmpty()) {
+            System.out.println("A estante está vazia.");
+        } else {
+            System.out.println("Livros na estante:");
+            for (Livro livro : livros) {
+                System.out.println("- " + livro);
+            }
+        }
     }
-}
+
