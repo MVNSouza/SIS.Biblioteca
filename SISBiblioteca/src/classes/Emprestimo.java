@@ -37,4 +37,28 @@ public boolean getativo(){
     return ativo;
 }
 
+public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public void encerrarEmprestimo() {
+        if (this.ativo) {
+            this.ativo = false;
+            System.out.println("Empréstimo do livro '" + livro + "' encerrado com sucesso.");
+        } else {
+            System.out.println("O empréstimo já está encerrado.");
+        }
+
+@Override
+    public String toString() {
+        return "Emprestimo {" +
+                "Livro: " + livro +
+                ", Usuario: " + usuario +
+                ", Funcionario: " + funcionario +
+                ", Data de Emprestimo: " + dataEmprestimo +
+                ", Ativo: " + ativo +
+                '}';
+    }
+
+
 }
