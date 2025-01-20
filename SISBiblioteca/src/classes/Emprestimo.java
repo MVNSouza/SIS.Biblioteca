@@ -1,6 +1,7 @@
-package classes;
 
+package classes;
 import java.util.Date;
+
 
 public class Emprestimo{
 private Livro livro;
@@ -10,11 +11,12 @@ private Date dataInicioEmprestimo;
 private Date dataDevolucao;
 private boolean ativo;
 
-public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date dataEmprestimo, boolean ativo){
+public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date dataEmprestimo, Date devolucao, boolean ativo){
     this.livro = livro;
     this.usuario = usuario;
     this.funcionario = funcionario;
     this.dataInicioEmprestimo = dataEmprestimo;
+    this.dataDevolucao = devolucao;
     this.ativo = ativo;
 }
 
@@ -51,6 +53,7 @@ public void setDataDevolucao(Date dataDevolucao) {
         }
     }
 
+
     @Override
     public String toString(){
         return "Emprestimo {" +
@@ -63,6 +66,6 @@ public void setDataDevolucao(Date dataDevolucao) {
     }
 
 
-
-
 }
+
+
