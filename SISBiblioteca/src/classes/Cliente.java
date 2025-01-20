@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cliente {
-    protected String nome, id, senha, email;
+    // Váriaveis para sub-classes
+    protected String nome, senha, email;
+    protected int id;
+
+
     public static ArrayList<Login> loginsU = new ArrayList<>();
     public static ArrayList<Login> loginsF = new ArrayList<>();
     public static HashMap<Funcionario, Login> loginsFunc = new HashMap<>();
     public static HashMap<Usuario, Login> loginsUser = new HashMap<>();
 
-    // Classe para logins
+
+    // %%%%%%%%%%%%%%%%% Classe para logins
     public static class Login {
         String email, senha;
 
@@ -20,36 +25,50 @@ public class Cliente {
         }
     }
 
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    // Método para varredura
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    public static boolean varreduraLogin(Login l, ArrayList<Login> array){
+
+        for (Login login : array){
+            return login.email.equals(l.email) && login.senha.equals(l.senha);
+        }
+            return false;
+    }
+
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    // Método para login
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
     public static void login(String email, String senha, int opcao){
         // Opção == 1 --> Funcionário; Opção == 0 --> Usuário
+        
         Login l = new Login(email, senha);
-        boolean loginUsuarioExiste = false;
-        boolean loginFuncionarioExiste = false;
-
-        // Varredura por logins
-        for (Login login : loginsU){
-            if (login == l){
-                loginUsuarioExiste = true;
-            }
-        }
-        for (Login login : loginsF){
-            if (login == l){
-                loginFuncionarioExiste = true;
-            }
-        }
-
-
+        boolean loginUsuarioExiste = varreduraLogin(l, loginsU);
+        boolean loginFuncionarioExiste = varreduraLogin(l, loginsF);
+        
         // Associação de conta
         if ((loginFuncionarioExiste && opcao == 1) || (loginUsuarioExiste && opcao == 0)){
             if (opcao == 1 ){
-                for (Map.Entry<Funcionario, Login> entry: loginsFunc.entrySet()){
-                    if (entry.getValue() == l) {
-                        System.out.println("Bem vindo!");
+                for (HashMap.Entry<Funcionario, Login> entry: loginsFunc.entrySet()){
+                    if (entry.getValue().email.equals(l.email) && entry.getValue().senha.equals(l.senha)) {
+                        System.out.println("Bem vindo, " + entry.getKey().getNome());
                         Controlador.menuFuncionario(entry.getKey());
                     }
 
                 }
             } else if (opcao == 0) {
+                for (HashMap.Entry<Usuario, Login> entry: loginsUser.entrySet()){
+                    if (entry.getValue().email.equals(l.email) && entry.getValue().senha.equals(l.senha)) {
+                        System.out.println("Bem vindo!");
+                        Controlador.menuUsuario(entry.getKey());
+                    }
+
+                }
 
             }
 
