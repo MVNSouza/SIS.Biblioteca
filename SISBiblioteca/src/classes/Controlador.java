@@ -14,7 +14,7 @@ public class Controlador {
         String email = input.next();
         String senha = input.next();
         classes.Cliente.login(email, senha, 1);
-        
+
     }
 
     public static void menuFuncionario(Funcionario func){

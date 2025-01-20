@@ -1,19 +1,22 @@
-package classes;
 
+package classes;
 import java.util.Date;
+
 
 public class Emprestimo{
 private Livro livro;
 private Usuario usuario;
 private Funcionario funcionario;
-private Date dataEmprestimo;
+private Date dataInicioEmprestimo;
+private Date dataDevolucao;
 private boolean ativo;
 
-public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date dataEmprestimo, boolean ativo){
+public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date dataEmprestimo, Date devolucao, boolean ativo){
     this.livro = livro;
     this.usuario = usuario;
     this.funcionario = funcionario;
-    this.dataEmprestimo = dataEmprestimo;
+    this.dataInicioEmprestimo = dataEmprestimo;
+    this.dataDevolucao = devolucao;
     this.ativo = ativo;
 }
 
@@ -30,7 +33,7 @@ public Funcionario getFuncionario(){
 }
 
 public Date getdataEmprestDate(){
-    return dataEmprestimo;
+    return dataInicioEmprestimo;
 }
 
 public boolean getativo(){
@@ -48,17 +51,21 @@ public void setDataDevolucao(Date dataDevolucao) {
         } else {
             System.out.println("O empréstimo já está encerrado.");
         }
+    }
 
-@Override
-    public String toString() {
+
+    @Override
+    public String toString(){
         return "Emprestimo {" +
                 "Livro: " + livro +
                 ", Usuario: " + usuario +
                 ", Funcionario: " + funcionario +
-                ", Data de Emprestimo: " + dataEmprestimo +
-                ", Ativo: " + ativo +
-                '}';
+                ", Data de Emprestimo: " + dataInicioEmprestimo +
+                ", Situação: " + (ativo? "Empréstimo ativo" : "Devolvido em" + dataDevolucao) +
+                "}";
     }
 
 
 }
+
+
