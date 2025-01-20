@@ -1,5 +1,6 @@
 package classes;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -86,6 +87,7 @@ public class Cliente {
     }
 
     public static void autocadastro(String email, String senha){
+
 
     }
 
