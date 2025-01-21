@@ -1,8 +1,11 @@
+package classes;
+import java.util.ArrayList;
+
 public class Estante {
     private String genero;
     private String titulo;
     private String codigoGenero;
-    private List<Livro> livros;
+    private ArrayList<Livro> livros;
 
     public Estante(String genero, String titulo, String codigoGenero) {
         this.genero = genero;
@@ -35,11 +38,11 @@ public class Estante {
         this.codigoGenero = codigoGenero;
     }
 
-    public List<Livro> getLivros() {
+    public ArrayList<Livro> getLivros() {
         return livros;
     }
 
-    public void setLivros(List<Livro> livros) {
+    public void setLivros(ArrayList<Livro> livros) {
         this.livros = livros;
     }
 
@@ -73,3 +76,5 @@ public class Estante {
             }
         }
     }
+
+}
