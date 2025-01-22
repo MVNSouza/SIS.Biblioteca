@@ -3,9 +3,10 @@ package classes;
 public class Funcionario extends Cliente {
     boolean solicitacoesPendentes;
 
-    public Funcionario(String nome, int id, String senha, String email){
+    public Funcionario(String nome, String senha, String email){
+        logins ++;
         this.nome = nome;
-        this.id = id;
+        this.id = logins;
         this.senha = senha;
         this.email = email;
     }
