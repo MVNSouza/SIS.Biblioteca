@@ -10,13 +10,13 @@ public class Cliente {
     protected String nome, senha, email;
     protected int id;
 
-
+    public static int logins = 0;
     public static ArrayList<Login> loginsU = new ArrayList<>();
     public static ArrayList<Login> loginsF = new ArrayList<>();
     public static HashMap<Funcionario, Login> loginsFunc = new HashMap<>();
     public static HashMap<Usuario, Login> loginsUser = new HashMap<>();
 
-    Scanner input = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
 
 
     // %%%%%%%%%%%%%%%%% Classe para logins
@@ -29,22 +29,32 @@ public class Cliente {
         }
     }
 
-    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    // Método para varredura
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //                   Método para varredura
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-    public static boolean varreduraLogin(Login l, ArrayList<Login> array){
+    public static boolean varreduraLogin(Login l, ArrayList<Login> array, String tipo){
 
-        for (Login login : array){
-            return login.email.equals(l.email) && login.senha.equals(l.senha);
-        }
+        if (tipo.equals("all")){
+            for (Login login : array){
+                return login.email.equals(l.email) && login.senha.equals(l.senha);
+            }
+                return false;
+
+        } else if (tipo.equals("email")){
+            for (Login login : array){
+                return login.email.equals(l.email);
+            } 
+                return false;
+        } else {
             return false;
+        }
     }
 
 
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    // Método para login
+    //                  Método para login
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -52,8 +62,8 @@ public class Cliente {
         // Opção == 1 --> Funcionário; Opção == 0 --> Usuário
         
         Login l = new Login(email, senha);
-        boolean loginUsuarioExiste = varreduraLogin(l, loginsU);
-        boolean loginFuncionarioExiste = varreduraLogin(l, loginsF);
+        boolean loginUsuarioExiste = varreduraLogin(l, loginsU, "all");
+        boolean loginFuncionarioExiste = varreduraLogin(l, loginsF, "all");
         
         // Associação de conta
         if ((loginFuncionarioExiste && opcao == 1) || (loginUsuarioExiste && opcao == 0)){
@@ -89,11 +99,62 @@ public class Cliente {
         
     }
 
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //              Método para cadastro
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     public static void cadastro(int opcao){
         System.out.println("Insira seus dados: \n");
-        System.out.println("");
+        System.out.print("Nome completo: ");
+        String n = input.nextLine();
+        System.out.print("\nEmail: ");
+        String e = input.nextLine();
+        System.out.print("\nSenha: ");
+        String s = input.nextLine();
+
+        if (opcao == 1){
+            Funcionario f = new Funcionario(n, e, s);
+            Login log = new Login(e, s);
+            if(varreduraLogin(log, loginsF, "email")){
+                System.out.println("Já existe um funcionário cadastrado com o email informado.");
+            } else {
+
+                loginsF.add(log);
+                loginsFunc.putIfAbsent(f, log);
+                System.out.println("Funcionário >>"+ f.getNome() + "<< cadastrado.");
+            
+            }
+        
+        } else if (opcao == 0){
+            System.out.print("\nEndereço: ");
+            String end = input.nextLine();
+            
+            Usuario u = new Usuario(n, s, e, end);
+            Login log = new Login(e, s);
+            
+            
+            if(varreduraLogin(log, loginsU, "email")){
+                System.out.println("Já existe um usuário cadastrado com o email informado.");
+            } else {
+                loginsU.add(log);
+                loginsUser.put(u, log);
+                System.out.println("Usuário >>"+ u.getNome() + "<< cadastrado.");
+            }
+        }
 
 
+    }
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //         Listagem para arrays de logins
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public static void listarArrayLogin(ArrayList<Login> array){
+        System.out.println("============ Logins =============");
+        for(Login login : array){
+            System.out.println("Email: " + login.email
+            + "Senha: " + login.senha);
+        }
     }
 
 }
