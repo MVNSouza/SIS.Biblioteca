@@ -3,6 +3,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Cliente {
     // Váriaveis para sub-classes
@@ -14,6 +15,8 @@ public class Cliente {
     public static ArrayList<Login> loginsF = new ArrayList<>();
     public static HashMap<Funcionario, Login> loginsFunc = new HashMap<>();
     public static HashMap<Usuario, Login> loginsUser = new HashMap<>();
+
+    Scanner input = new Scanner(System.in);
 
 
     // %%%%%%%%%%%%%%%%% Classe para logins
@@ -86,7 +89,9 @@ public class Cliente {
         
     }
 
-    public static void autocadastro(String email, String senha){
+    public static void cadastro(int opcao){
+        System.out.println("Insira seus dados: \n");
+        System.out.println("");
 
 
     }

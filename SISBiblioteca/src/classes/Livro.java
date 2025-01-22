@@ -1,7 +1,7 @@
 package classes;
 
 public class Livro {
-    private String titulo; 
+    private String titulo;
     private String codigo; 
     private String autor;
     private int numeroExemplar;
