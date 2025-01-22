@@ -1,17 +1,20 @@
 package classes;
+
 import java.util.ArrayList;
 
 public class Estante {
+
     private String genero;
     private String titulo;
     private String codigoGenero;
-    private ArrayList<Livro> livros;
+    public static ArrayList<Livro> livros = new ArrayList<>();
+    public static ArrayList<Estante> estantes = new ArrayList<>();
+
 
     public Estante(String genero, String titulo, String codigoGenero) {
         this.genero = genero;
         this.titulo = titulo;
         this.codigoGenero = codigoGenero;
-        this.livros = new ArrayList<>();
     }
 
     public String getGenero() {
@@ -77,4 +80,6 @@ public class Estante {
         }
     }
 
+
 }
+

@@ -1,5 +1,6 @@
 package classes;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -91,6 +92,7 @@ public class Cliente {
     public static void cadastro(int opcao){
         System.out.println("Insira seus dados: \n");
         System.out.println("");
+
 
     }
 
