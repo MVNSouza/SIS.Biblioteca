@@ -6,6 +6,8 @@ public class Usuario extends Cliente {
     private boolean emprestimoAtivo = false;
 
     public Usuario(String nome, String senha, String email, String endereco){
+        logins++;
+        this.id = logins;
         this.nome = nome;
         this.senha = senha;
         this.email = email;
