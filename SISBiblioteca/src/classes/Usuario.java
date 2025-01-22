@@ -1,6 +1,7 @@
 package classes;
 
 public class Usuario extends Cliente {
+  
     private String endereco;
     private boolean emprestimoAtivo = false;
 
@@ -53,4 +54,3 @@ public class Usuario extends Cliente {
     }
 
 }
-
