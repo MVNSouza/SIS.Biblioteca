@@ -1,10 +1,11 @@
 package classes;
 
 public class Funcionario extends Cliente {
-    boolean solicitacoesPendentes;
+    boolean solicitacoesPendentes = false;
 
     public Funcionario(String nome, String senha, String email){
-        logins ++;
+        logins++;
+        
         this.nome = nome;
         this.id = logins;
         this.senha = senha;
