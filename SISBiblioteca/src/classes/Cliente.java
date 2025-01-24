@@ -10,6 +10,8 @@ public class Cliente {
     protected String nome, senha, email;
     protected int id;
 
+    public static int logins;
+
 
     public static ArrayList<Login> loginsU = new ArrayList<>();
     public static ArrayList<Login> loginsF = new ArrayList<>();
@@ -34,12 +36,22 @@ public class Cliente {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-    public static boolean varreduraLogin(Login l, ArrayList<Login> array){
+    public static boolean varreduraLogin(Login l, ArrayList<Login> array, String tipo){
 
-        for (Login login : array){
-            return login.email.equals(l.email) && login.senha.equals(l.senha);
+        switch (tipo) {
+            case "all":
+                for (Login login : array){
+                    return login.email.equals(l.email) && login.senha.equals(l.senha);
+                }
+                return false;
+            case "email":
+                for (Login login : array){
+                    return login.email.equals(l.email);
+                } 
+                return false;
+            default:
+                return false;
         }
-            return false;
     }
 
 
@@ -52,8 +64,8 @@ public class Cliente {
         // Opção == 1 --> Funcionário; Opção == 0 --> Usuário
         
         Login l = new Login(email, senha);
-        boolean loginUsuarioExiste = varreduraLogin(l, loginsU);
-        boolean loginFuncionarioExiste = varreduraLogin(l, loginsF);
+        boolean loginUsuarioExiste = varreduraLogin(l, loginsU, "all");
+        boolean loginFuncionarioExiste = varreduraLogin(l, loginsF, "all");
         
         // Associação de conta
         if ((loginFuncionarioExiste && opcao == 1) || (loginUsuarioExiste && opcao == 0)){

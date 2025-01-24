@@ -1,7 +1,8 @@
 package classes;
 
 public class Funcionario extends Cliente {
-    boolean solicitacoesPendentes;
+    boolean solicitacoesPendentes = false;
+    int qtdSolicitacoes;
 
     public Funcionario(String nome, String senha, String email){
         logins++;
