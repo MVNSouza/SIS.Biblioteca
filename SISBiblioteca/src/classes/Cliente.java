@@ -10,7 +10,9 @@ public class Cliente {
     protected String nome, senha, email;
     protected int id;
 
+
     public static int logins = 0;
+
     public static ArrayList<Login> loginsU = new ArrayList<>();
     public static ArrayList<Login> loginsF = new ArrayList<>();
     public static HashMap<Funcionario, Login> loginsFunc = new HashMap<>();
@@ -36,19 +38,21 @@ public class Cliente {
 
     public static boolean varreduraLogin(Login l, ArrayList<Login> array, String tipo){
 
-        if (tipo.equals("all")){
-            for (Login login : array){
-                return login.email.equals(l.email) && login.senha.equals(l.senha);
-            }
+
+        switch (tipo) {
+            case "all":
+                for (Login login : array){
+                    return login.email.equals(l.email) && login.senha.equals(l.senha);
+                }
+                return false;
+            case "email":
+                for (Login login : array){
+                    return login.email.equals(l.email);
+                } 
+                return false;
+            default:
                 return false;
 
-        } else if (tipo.equals("email")){
-            for (Login login : array){
-                return login.email.equals(l.email);
-            } 
-                return false;
-        } else {
-            return false;
         }
     }
 

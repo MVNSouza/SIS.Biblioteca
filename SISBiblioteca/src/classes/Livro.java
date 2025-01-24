@@ -19,8 +19,8 @@ public class Livro {
 
     }
 
-    public void  gerarInformação(){
-        System.out.println("Título: " + titulo 
+    public String  gerarInformação(){
+        return ("Título: " + titulo 
         + "\nCódigo: " + codigo 
         + "\nAutor: " + autor 
         + "\nNº Exemplar: " + numeroExemplar

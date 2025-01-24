@@ -41,14 +41,6 @@ public class Estante {
         this.codigoGenero = codigoGenero;
     }
 
-    public ArrayList<Livro> getLivros() {
-        return livros;
-    }
-
-    public void setLivros(ArrayList<Livro> livros) {
-        this.livros = livros;
-    }
-
     public void adicionarLivro(Livro livro) {
         livros.add(livro);
         System.out.println("Livro adicionado: " + livro.getTitulo());
@@ -75,10 +67,18 @@ public class Estante {
         } else {
             System.out.println("Livros na estante:");
             for (Livro livro : livros) {
-                System.out.println("- " + livro);
+                int num = 1;
+                System.out.println("------> º"+ num + ": " + livro.gerarInformação());
+                System.out.println("===========================");
             }
         }
     }
 
-
+    public void listarEstantes(){
+        for(Estante estante : estantes){
+            System.out.println("");
+        }
+    }
 }
+
+
