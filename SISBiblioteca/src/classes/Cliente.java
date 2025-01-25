@@ -161,4 +161,43 @@ public class Cliente {
         }
     }
 
+    public void listarLivros(){
+        System.out.println("""
+                           Escolha o tipo de consulta:
+                           
+                           1 - Geral
+                           2 - Por autor
+                           3 - Por código
+                           4 - Por título
+                           """);
+        int opcao = input.nextInt();
+
+        switch (opcao){
+            case 1: 
+                Estante.listarLivros();
+            case 2:
+                System.out.print("Nome do autor: ");
+                String nomeAutor = input.nextLine();
+                Estante.filtrarPorCodigo(nomeAutor);
+                case 3:
+                System.out.print("Número de código: ");
+                String codigo = input.nextLine();
+                Estante.filtrarPorCodigo(codigo);
+                case 4:
+                System.out.print("Título do livro: ");
+                String titulo = input.nextLine();
+                Estante.filtrarPorTitulo(titulo);
+            default:
+                System.out.println("Opção inválida");
+
+            }
+        }
+
+
+
+
+
+
 }
+
+

@@ -61,7 +61,7 @@ public class Estante {
         }
     }
 
-    public void listarLivros() {
+    public static void listarLivros() {
         if (livros.isEmpty()) {
             System.out.println("A estante está vazia.");
         } else {
@@ -76,9 +76,70 @@ public class Estante {
 
     public void listarEstantes(){
         for(Estante estante : estantes){
-            System.out.println("");
+            System.out.println(estante.toString());
         }
     }
+
+    public static void filtrarPorAutor(String autor){
+        String autorMinusculo = autor.toLowerCase();
+        if (livros.isEmpty()){
+            System.out.println("Não há livros cadastrados para realizar consulta");
+        } else {
+            System.out.println("+ Livros encontrados: ");
+            int contador = 1;
+
+            for(Livro livro : livros){
+                if ((livro.getAutor().toLowerCase()).equals(autorMinusculo)){
+                    System.out.println("Livro nº "+ contador);
+                    livro.gerarInformação();
+                    System.out.println(">");
+                    contador ++;
+                }
+            }
+
+        }
+    }
+
+    public static void filtrarPorTitulo(String titulo){
+        String tituloMinusculo = titulo.toLowerCase();
+        if (livros.isEmpty()){
+            System.out.println("Não há livros cadastrados para realizar consulta");
+        } else {
+            System.out.println("+ Livros encontrados: ");
+            int contador = 1;
+
+            for(Livro livro : livros){
+                if ((livro.getTitulo().toLowerCase()).equals(tituloMinusculo)){
+                    System.out.println("Livro nº "+ contador);
+                    livro.gerarInformação();
+                    System.out.println(">");
+                    contador ++;
+                }
+            }
+
+        }
+    }
+
+    public static void filtrarPorCodigo(String codigo){
+        if (livros.isEmpty()){
+            System.out.println("Não há livros cadastrados para realizar consulta");
+        } else {
+            System.out.println("+ Livros encontrados: ");
+            int contador = 1;
+
+            for(Livro livro : livros){
+                if (livro.getCodigo().equals(codigo)){
+                    System.out.println("Livro nº "+ contador);
+                    livro.gerarInformação();
+                    System.out.println(">");
+                    contador ++;
+                }
+            }
+
+        }
+    }
+
+
 }
 
 

@@ -21,11 +21,13 @@ public class Livro {
 
     public String  gerarInformação(){
         return ("Título: " + titulo 
-        + "\nCódigo: " + codigo 
         + "\nAutor: " + autor 
-        + "\nNº Exemplar: " + numeroExemplar
+        + "\nCódigo: " + codigo 
+        + " |   Nº Exemplar: " + numeroExemplar
         + "\nEmprestado: " + (emprestado ? "Sim" : "Não")
-        + "\nSolicitado: " + (solicitado ? "Sim" : "Não"));
+        + " |   Solicitado: " + (solicitado ? "Sim" : "Não") +
+        "\n"
+        );
 
     }
 
