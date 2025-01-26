@@ -5,17 +5,24 @@ import java.util.ArrayList;
 public class Estante {
 
     private String genero;
-    private String titulo;
     private String codigoGenero;
-    public static ArrayList<Livro> livros = new ArrayList<>();
+    private ArrayList<Livro> livrosEstante = new ArrayList<>();
+
+
+    public static ArrayList<Livro> livrosGeral = new ArrayList<>();
     public static ArrayList<Estante> estantes = new ArrayList<>();
 
 
-    public Estante(String genero, String titulo, String codigoGenero) {
+    public Estante(String genero, String codigoGenero) {
         this.genero = genero;
-        this.titulo = titulo;
         this.codigoGenero = codigoGenero;
     }
+
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //      GETTERS & SETTERS
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
     public String getGenero() {
         return genero;
@@ -25,13 +32,6 @@ public class Estante {
         this.genero = genero;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
 
     public String getCodigoGenero() {
         return codigoGenero;
@@ -41,16 +41,27 @@ public class Estante {
         this.codigoGenero = codigoGenero;
     }
 
+
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //          ADICIONAR LIVROS
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     public void adicionarLivro(Livro livro) {
-        livros.add(livro);
+        livrosEstante.add(livro);
         System.out.println("Livro adicionado: " + livro.getTitulo());
     }
 
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //          REMOVER LIVROS
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     public void removerLivro(String titulo) {
         boolean encontrado = false;
-        for (Livro livro : livros) {
+        for (Livro livro : livrosEstante) {
             if (livro.getTitulo().equalsIgnoreCase(titulo)) {
-                livros.remove(livro);
+                livrosEstante.remove(livro);
                 System.out.println("Livro removido: " + titulo);
                 encontrado = true;
                 break;
@@ -61,12 +72,17 @@ public class Estante {
         }
     }
 
-    public static void listarLivros() {
-        if (livros.isEmpty()) {
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //      LISTAR LIVROS (DA ESTANTE)
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public void listarLivros() {
+        if (livrosEstante.isEmpty()) {
             System.out.println("A estante está vazia.");
         } else {
             System.out.println("Livros na estante:");
-            for (Livro livro : livros) {
+            for (Livro livro : livrosGeral) {
                 int num = 1;
                 System.out.println("------> º"+ num + ": " + livro.gerarInformação());
                 System.out.println("===========================");
@@ -74,21 +90,32 @@ public class Estante {
         }
     }
 
-    public void listarEstantes(){
-        for(Estante estante : estantes){
-            System.out.println(estante.toString());
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //          LISTAR LIVROS GERAIS
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public void listarLivrosGeral() {
+        for (Estante estante : estantes){
+            estante.listarLivros();
         }
     }
 
-    public static void filtrarPorAutor(String autor){
+
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //          FILTRAGEM DE LIVROS
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    public static void filtrarLivroPorAutor(String autor){
         String autorMinusculo = autor.toLowerCase();
-        if (livros.isEmpty()){
+        if (livrosGeral.isEmpty()){
             System.out.println("Não há livros cadastrados para realizar consulta");
         } else {
             System.out.println("+ Livros encontrados: ");
             int contador = 1;
 
-            for(Livro livro : livros){
+            for(Livro livro : livrosGeral){
                 if ((livro.getAutor().toLowerCase()).equals(autorMinusculo)){
                     System.out.println("Livro nº "+ contador);
                     livro.gerarInformação();
@@ -100,15 +127,15 @@ public class Estante {
         }
     }
 
-    public static void filtrarPorTitulo(String titulo){
+    public static void filtrarLivroPorTitulo(String titulo){
         String tituloMinusculo = titulo.toLowerCase();
-        if (livros.isEmpty()){
+        if (livrosGeral.isEmpty()){
             System.out.println("Não há livros cadastrados para realizar consulta");
         } else {
             System.out.println("+ Livros encontrados: ");
             int contador = 1;
 
-            for(Livro livro : livros){
+            for(Livro livro : livrosGeral){
                 if ((livro.getTitulo().toLowerCase()).equals(tituloMinusculo)){
                     System.out.println("Livro nº "+ contador);
                     livro.gerarInformação();
@@ -120,14 +147,14 @@ public class Estante {
         }
     }
 
-    public static void filtrarPorCodigo(String codigo){
-        if (livros.isEmpty()){
+    public static void filtrarLivroPorCodigo(String codigo){
+        if (livrosGeral.isEmpty()){
             System.out.println("Não há livros cadastrados para realizar consulta");
         } else {
             System.out.println("+ Livros encontrados: ");
             int contador = 1;
 
-            for(Livro livro : livros){
+            for(Livro livro : livrosGeral){
                 if (livro.getCodigo().equals(codigo)){
                     System.out.println("Livro nº "+ contador);
                     livro.gerarInformação();
@@ -138,6 +165,49 @@ public class Estante {
 
         }
     }
+
+
+
+    @Override
+    public String toString() {
+        String s = ("Gênero: " + genero + "\nCódigo: " + codigoGenero);
+        return s;
+    }
+
+
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //          LISTAR ESTANTES
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public static void listarEstantes(){
+        for(Estante estante : estantes){
+            System.out.println(estante.toString());
+        }
+    }
+
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //          FILTRAR ESTANTES   
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public static void filtrarEstantePorCodigo(String codigo){
+        for (Estante estante : estantes) {
+            if (estante.codigoGenero.equals(codigo)) {
+                System.out.println(estante.toString());
+            }
+            
+        }
+    }
+
+    public static void filtrarEstantePorGenero (String genero) {
+        for (Estante estante : estantes) {
+            if (estante.genero.equals(genero)) {
+                System.out.println(estante.toString());
+            }
+            
+        }
+    }
+
 
 
 }

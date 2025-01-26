@@ -41,7 +41,7 @@ public class Usuario extends Cliente {
 
     // %%%%%%%%%%%%%%% ENDEREÇO
     public String getEndereco(){
-        return nome;
+        return endereco;
     }
     public void setEndereco(String endereco){
         this.endereco = endereco;

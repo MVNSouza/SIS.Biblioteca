@@ -117,8 +117,10 @@ public class Cliente {
         String s = input.nextLine();
 
         if (opcao == 1){
+
             Funcionario f = new Funcionario(n, e, s);
             Login log = new Login(e, s);
+
             if(varreduraLogin(log, loginsF, "email")){
                 System.out.println("Já existe um funcionário cadastrado com o email informado.");
             } else {
@@ -161,7 +163,14 @@ public class Cliente {
         }
     }
 
-    public void listarLivros(){
+
+
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//          Método de listar livros
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    public void consultarLivros(){
         System.out.println("""
                            Escolha o tipo de consulta:
                            
@@ -169,24 +178,42 @@ public class Cliente {
                            2 - Por autor
                            3 - Por código
                            4 - Por título
+                           5 - Por estante
                            """);
         int opcao = input.nextInt();
 
         switch (opcao){
-            case 1: 
-                Estante.listarLivros();
+            case 1:
+                for (Estante estante : Estante.estantes){
+                    estante.listarLivrosGeral();
+                }
             case 2:
                 System.out.print("Nome do autor: ");
                 String nomeAutor = input.nextLine();
-                Estante.filtrarPorCodigo(nomeAutor);
-                case 3:
+                System.out.println("");
+                Estante.filtrarLivroPorAutor(nomeAutor);
+            case 3:
                 System.out.print("Número de código: ");
                 String codigo = input.nextLine();
-                Estante.filtrarPorCodigo(codigo);
-                case 4:
+                System.out.println("");
+                Estante.filtrarLivroPorCodigo(codigo);
+            case 4:
                 System.out.print("Título do livro: ");
                 String titulo = input.nextLine();
-                Estante.filtrarPorTitulo(titulo);
+                System.out.println("");
+                Estante.filtrarLivroPorTitulo(titulo);
+            case 5:
+                System.out.print("Código da estante: ");
+                String codigoEstante = input.nextLine();
+                for (Estante estante : Estante.estantes) {
+                    if (estante.getCodigoGenero().equals(codigoEstante)){
+                        estante.listarLivros();
+                    } else {
+
+                    }
+                    
+                }
+
             default:
                 System.out.println("Opção inválida");
 
@@ -195,6 +222,39 @@ public class Cliente {
 
 
 
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //    Método de listagem de estantes
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    public void consultarEstantes(){
+        System.out.println("""
+            Escolha o tipo de consulta:
+
+            1 - Listar todas
+            2 - Consultar por código
+            3 - Consultar por gênero
+        """);
+        int opcao = input.nextInt();
+
+        switch (opcao){
+            case 1:
+                Estante.listarEstantes();
+            case 2:
+                System.out.println("Insira o código: ");
+                String codigo = input.nextLine();
+                System.out.println();
+                Estante.filtrarEstantePorCodigo(codigo);
+                case 3:
+                System.out.println("Insira o gênero: ");
+                String genero = input.nextLine();
+                Estante.filtrarEstantePorGenero(genero);
+                System.out.println();
+                
+            default:
+                System.out.println("Opção inválida");
+
+        }
+    }
 
 
 
