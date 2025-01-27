@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Livro {
     private String titulo;
     private String codigo; 
@@ -8,12 +10,15 @@ public class Livro {
     private boolean emprestado; 
     private boolean solicitado;
 
+    private final ArrayList<Emprestimo> historico;
+
     // Construtor
-    public Livro(String titulo, String codigo, String autor, int numeroExemplar, boolean emprestado, boolean solicitado){
+    public Livro(String titulo, String codigo, String autor, boolean emprestado, boolean solicitado){
+        historico = new ArrayList<>();
         this.titulo = titulo;
         this.codigo = codigo;
+        this.numeroExemplar = 1;
         this.autor = autor;
-        this.numeroExemplar = numeroExemplar;
         this.emprestado = emprestado;
         this.solicitado = solicitado;
 
@@ -43,7 +48,9 @@ public class Livro {
      * @param titulo the titulo to set
      */
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if (! titulo.isEmpty()){
+            this.titulo = titulo;
+        } 
     }
 
     /**
@@ -57,7 +64,9 @@ public class Livro {
      * @param codigo the codigo to set
      */
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        if (! codigo.isEmpty()){
+            this.codigo = codigo;
+        } 
     }
 
     /**
@@ -84,8 +93,8 @@ public class Livro {
     /**
      * @param numeroExemplar the numeroExemplar to set
      */
-    public void setNumeroExemplar(int numeroExemplar) {
-        this.numeroExemplar = numeroExemplar;
+    public void setNumeroExemplar() {
+        this.numeroExemplar = numeroExemplar ++;
     }
 
     /**
@@ -114,6 +123,13 @@ public class Livro {
      */
     public void setSolicitado(boolean solicitado) {
         this.solicitado = solicitado;
+    }
+
+    public void visualizarHistorico(){
+        int contador = 1;
+        for (Emprestimo emprestimo : historico){
+            emprestimo.toString();
+        }
     }
 
 }

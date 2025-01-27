@@ -55,4 +55,33 @@ public class Usuario extends Cliente {
         this.emprestimoAtivo = !emprestimoAtivo;
     }
 
+
+
+
+    
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //      SOLICITAR EMPRESTIMO
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    public void solicitarEmprestimo(Livro livro){
+        boolean livroEncontrado = false;
+
+        for (Livro l : Estante.livrosGeral){
+            if ((l.getCodigo().equals(livro.getCodigo()) && !l.isEmprestado())) {
+                Emprestimo e = new Emprestimo(livro, this, null, null, null, false);
+                Emprestimo.appendEmprestimoPendente(e);
+                
+                livroEncontrado = true;
+                break;
+            }
+        }
+        
+        if (livroEncontrado){
+            System.out.println("Empréstimo enviado para aprovação.");
+        } else {
+            System.out.println("Não foi possível encontrar nenhum exemplar do livro informado.");
+        }
+    }
+
 }

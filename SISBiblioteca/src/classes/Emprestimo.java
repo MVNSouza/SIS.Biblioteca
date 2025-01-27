@@ -1,5 +1,6 @@
 
 package classes;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +13,8 @@ private Date dataInicioEmprestimo;
 private Date dataDevolucao;
 private boolean ativo;
 
-public static ArrayList<Emprestimo> listaDeEmprestimosAtivos = new ArrayList<>();
+public static ArrayList<Emprestimo> emprestimosAtivos = new ArrayList<>();
+public static ArrayList<Emprestimo> emprestimosPendentes = new ArrayList<>();
 
 public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date dataEmprestimo, Date devolucao, boolean ativo){
     this.livro = livro;
@@ -55,7 +57,7 @@ public void setDataDevolucao(Date dataDevolucao) {
         if (this.ativo) {
             this.ativo = false;
             System.out.println("Empréstimo do livro '" + livro + "' encerrado com sucesso.");
-            listaDeEmprestimosAtivos.remove(this);
+            emprestimosAtivos.remove(this);
         } else {
             System.out.println("O empréstimo já está encerrado.");
         }
@@ -63,16 +65,31 @@ public void setDataDevolucao(Date dataDevolucao) {
 
 
     @Override
-    public String toString(){
-        return "Emprestimo {" +
-                "Livro: " + livro +
-                ", Usuario: " + usuario +
-                ", Funcionario: " + funcionario +
-                ", Data de Emprestimo: " + dataInicioEmprestimo +
-                ", Situação: " + (ativo? "Empréstimo ativo" : "Devolvido em" + dataDevolucao) +
-                "}";
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String dataInicio = (dataInicioEmprestimo != null) ? dateFormat.format(dataInicioEmprestimo) : "Não especificada";
+        String dataDevolucaoStr = (dataDevolucao != null) ? dateFormat.format(dataDevolucao) : "Não especificada";
+
+        return "Empréstimo {" +
+                "\n  Livro: " + (livro != null ? livro.toString() : "Não especificado") +
+                "\n  Usuário: " + (usuario != null ? usuario.toString() : "Não especificado") +
+                "\n  Funcionário: " + (funcionario != null ? funcionario.toString() : "Não especificado") +
+                "\n  Data de Início do Empréstimo: " + dataInicio +
+                "\n  Data de Devolução: " + dataDevolucaoStr +
+                "\n  Ativo: " + (ativo ? "Sim" : "Não") +
+                "\n}";
     }
 
+    public static void appendEmprestimoPendente(Emprestimo emprestimo){
+        emprestimosPendentes.add(emprestimo);
+        System.out.println("Empréstimo registrado como pendente.");
+    }
+
+    public static void aprovarEmprestimo(int index){
+        emprestimosAtivos.add(emprestimosPendentes.get(index));
+        System.out.println("Empréstimo aprovado!");
+    }
 
 }
 

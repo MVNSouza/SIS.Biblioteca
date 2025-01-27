@@ -6,7 +6,7 @@ public class Estante {
 
     private String genero;
     private String codigoGenero;
-    private ArrayList<Livro> livrosEstante = new ArrayList<>();
+    private final ArrayList<Livro> livrosEstante;
 
 
     public static ArrayList<Livro> livrosGeral = new ArrayList<>();
@@ -14,6 +14,7 @@ public class Estante {
 
 
     public Estante(String genero, String codigoGenero) {
+        livrosEstante = new ArrayList<>();
         this.genero = genero;
         this.codigoGenero = codigoGenero;
     }
@@ -29,7 +30,11 @@ public class Estante {
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
+        if (!(genero.isBlank())){
+            this.genero = genero.strip();
+        } else {
+            System.out.println("Insira um gênero válido");
+        }
     }
 
 
@@ -38,7 +43,11 @@ public class Estante {
     }
 
     public void setCodigoGenero(String codigoGenero) {
-        this.codigoGenero = codigoGenero;
+        if (! codigoGenero.isEmpty()){
+            this.codigoGenero = codigoGenero;
+        } else {
+            System.out.println("Insira um código válido");
+        }
     }
 
 
@@ -48,6 +57,12 @@ public class Estante {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     public void adicionarLivro(Livro livro) {
+        for (Livro l : livrosGeral) {
+            if (l.getCodigo().equals(livro.getCodigo())){
+                l.setNumeroExemplar();
+            }
+            
+        }
         livrosEstante.add(livro);
         System.out.println("Livro adicionado: " + livro.getTitulo());
     }
