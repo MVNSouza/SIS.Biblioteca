@@ -56,15 +56,17 @@ public class Estante {
     //          ADICIONAR LIVROS
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    public void adicionarLivro(Livro livro) {
-        for (Livro l : livrosGeral) {
-            if (l.getCodigo().equals(livro.getCodigo())){
-                l.setNumeroExemplar();
-            }
-            
-        }
+    public void appendLivro(Livro livro) {
         livrosEstante.add(livro);
         System.out.println("Livro adicionado: " + livro.getTitulo());
+    }
+
+    public static void autoAppendEstante(Livro livro) {
+        for (Estante estante : estantes){
+            if (estante.codigoGenero.equals(livro.getCodigo().substring(0, 3))){
+                
+            }
+        }
     }
 
 
@@ -109,7 +111,7 @@ public class Estante {
     //          LISTAR LIVROS GERAIS
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    public void listarLivrosGeral() {
+    public static void listarLivrosGeral() {
         for (Estante estante : estantes){
             estante.listarLivros();
         }

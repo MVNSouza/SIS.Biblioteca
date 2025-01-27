@@ -13,15 +13,21 @@ public class Livro {
     private final ArrayList<Emprestimo> historico;
 
     // Construtor
-    public Livro(String titulo, String codigo, String autor, boolean emprestado, boolean solicitado){
+    public Livro(String titulo, String codigo, String autor){
         historico = new ArrayList<>();
         this.titulo = titulo;
         this.codigo = codigo;
         this.numeroExemplar = 1;
+        for (Livro livro : Estante.livrosGeral) {
+            if (livro.codigo.equals(this.codigo)){
+                this.numeroExemplar ++;
+            } 
+        }
         this.autor = autor;
-        this.emprestado = emprestado;
-        this.solicitado = solicitado;
+        this.emprestado = false;
+        this.solicitado = false;
 
+        Estante.livrosGeral.add(this);
     }
 
     public String  gerarInformação(){
@@ -93,8 +99,8 @@ public class Livro {
     /**
      * @param numeroExemplar the numeroExemplar to set
      */
-    public void setNumeroExemplar() {
-        this.numeroExemplar = numeroExemplar ++;
+    public void setNumeroExemplar(int numeroExemplar) {
+        this.numeroExemplar = numeroExemplar;
     }
 
     /**

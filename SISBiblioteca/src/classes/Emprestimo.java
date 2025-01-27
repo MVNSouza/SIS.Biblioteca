@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 public class Emprestimo{
+private int num = 1;
 private final Livro livro;
 private final Usuario usuario;
 private Funcionario funcionario;
@@ -13,6 +14,7 @@ private Date dataInicioEmprestimo;
 private Date dataDevolucao;
 private boolean ativo;
 
+public static ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 public static ArrayList<Emprestimo> emprestimosAtivos = new ArrayList<>();
 public static ArrayList<Emprestimo> emprestimosPendentes = new ArrayList<>();
 
@@ -23,16 +25,19 @@ public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date da
     this.dataInicioEmprestimo = dataEmprestimo;
     this.dataDevolucao = devolucao;
     this.ativo = ativo;
+
+    emprestimos.add(this);
 }
 
-    public Emprestimo(Livro livro, Usuario usuario) {
-        this.livro = livro;
-        this.usuario = usuario;
-    }
 
-public void getLivro(){
+public Livro getLivro(){
+    return this.livro;
+}    
+
+public void getInfoLivro(){
     livro.gerarInformação();
 }
+
 
 public Usuario getUsuario(){
     return usuario;
@@ -46,8 +51,16 @@ public Date getdataInicio(){
     return dataInicioEmprestimo;
 }
 
+public void setDataInicio(Date data){
+    this.dataInicioEmprestimo = data;
+}
+
 public boolean getativo(){
     return ativo;
+}
+
+public void setAtivo(boolean isAtivo){
+    this.ativo = isAtivo;
 }
 
 public Date getDataDevolucao(){
@@ -57,6 +70,13 @@ public Date getDataDevolucao(){
 public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+
+public int getNum(){
+    return num;
+}
+public void setNum(int num){
+    this.num = num;
+}
 
     public void encerrarEmprestimo() {
         if (this.ativo) {
@@ -87,11 +107,13 @@ public void setDataDevolucao(Date dataDevolucao) {
     }
 
     public static void appendEmprestimoPendente(Emprestimo emprestimo){
+        emprestimo.num = emprestimosPendentes.getLast().getNum() + 1;
         emprestimosPendentes.add(emprestimo);
         System.out.println("Empréstimo registrado como pendente.");
     }
 
     public static void aprovarEmprestimo(int index){
+        emprestimosPendentes.get(index).
         emprestimosAtivos.add(emprestimosPendentes.get(index));
         System.out.println("Empréstimo aprovado!");
     }
