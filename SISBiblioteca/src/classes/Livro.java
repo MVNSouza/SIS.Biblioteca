@@ -128,7 +128,11 @@ public class Livro {
     public void visualizarHistorico(){
         int contador = 1;
         for (Emprestimo emprestimo : historico){
+
+            System.out.println(">>>>>>>>>> "+ contador);
             emprestimo.toString();
+
+            contador ++;
         }
     }
 

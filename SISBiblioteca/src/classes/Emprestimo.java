@@ -6,8 +6,8 @@ import java.util.Date;
 
 
 public class Emprestimo{
-private Livro livro;
-private Usuario usuario;
+private final Livro livro;
+private final Usuario usuario;
 private Funcionario funcionario;
 private Date dataInicioEmprestimo;
 private Date dataDevolucao;
@@ -24,6 +24,11 @@ public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date da
     this.dataDevolucao = devolucao;
     this.ativo = ativo;
 }
+
+    public Emprestimo(Livro livro, Usuario usuario) {
+        this.livro = livro;
+        this.usuario = usuario;
+    }
 
 public void getLivro(){
     livro.gerarInformação();
