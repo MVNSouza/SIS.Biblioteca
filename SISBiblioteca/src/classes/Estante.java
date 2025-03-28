@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Estante {
 
@@ -198,9 +199,16 @@ public class Estante {
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     public static void listarEstantes(){
-        for(Estante estante : estantes){
-            System.out.println(estante.toString());
+        String resultado = "";
+        if (estantes.isEmpty()) {
+            resultado = "Nenhuma estante encontrada";
+        } else {
+            for(Estante estante : estantes){
+                resultado += estante.toString();
+            }
         }
+
+        JOptionPane.showMessageDialog(null, resultado, "Lista de estantes", 1);
     }
 
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -6,6 +6,10 @@ import java.util.Date;
 
 
 public class Emprestimo{
+
+    public static int getNumEmprestimosPendentes() {
+        return numEmprestimosPendentes;
+    }
 private int num = 1;
 private final Livro livro;
 private final Usuario usuario;
@@ -14,9 +18,13 @@ private Date dataInicioEmprestimo;
 private Date dataDevolucao;
 private boolean ativo;
 
+
 public static ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 public static ArrayList<Emprestimo> emprestimosAtivos = new ArrayList<>();
 public static ArrayList<Emprestimo> emprestimosPendentes = new ArrayList<>();
+
+public static int numEmprestimosPendentes = emprestimosPendentes.size(); 
+
 
 public Emprestimo(Livro livro, Usuario usuario, Funcionario funcionario, Date dataEmprestimo, Date devolucao, boolean ativo){
     this.livro = livro;

@@ -40,18 +40,21 @@ public class Cliente {
 
 
         switch (tipo) {
-            case "all":
+            case "all" -> {
                 for (Login login : array){
                     return login.email.equals(l.email) && login.senha.equals(l.senha);
                 }
                 return false;
-            case "email":
+            }
+            case "email" -> {
                 for (Login login : array){
                     return login.email.equals(l.email);
                 } 
                 return false;
-            default:
+            }
+            default -> {
                 return false;
+            }
 
         }
     }
@@ -68,22 +71,27 @@ public class Cliente {
         Login l = new Login(email, senha);
         boolean loginUsuarioExiste = varreduraLogin(l, loginsU, "all");
         boolean loginFuncionarioExiste = varreduraLogin(l, loginsF, "all");
-        
+        boolean achou = false;
+
         // Associação de conta
         if ((loginFuncionarioExiste && opcao == 1) || (loginUsuarioExiste && opcao == 0)){
             if (opcao == 1 ){
                 for (HashMap.Entry<Funcionario, Login> entry: loginsFunc.entrySet()){
                     if (entry.getValue().email.equals(l.email) && entry.getValue().senha.equals(l.senha)) {
                         System.out.println("Bem vindo, " + entry.getKey().getNome());
+                        achou = true;
                         Controlador.menuFuncionario(entry.getKey());
+                        break;
                     }
-
+                    
                 }
             } else if (opcao == 0) {
                 for (HashMap.Entry<Usuario, Login> entry: loginsUser.entrySet()){
                     if (entry.getValue().email.equals(l.email) && entry.getValue().senha.equals(l.senha)) {
+                        achou = true;
                         System.out.println("Bem vindo!");
                         Controlador.menuUsuario(entry.getKey());
+                        break;
                     }
 
                 }
@@ -91,13 +99,15 @@ public class Cliente {
             }
 
         } else {
-            
-            switch (opcao) {
-                case 1 -> // Erro func
-                     System.out.println("\n ---- Nenhum funcionário encontrado com os dados informados \n");
-                case 0 -> // Erro user
-                    System.out.println("\n ---- Nenhum usuário encontrado com os dados informados \n");
-                default -> System.out.println("\n Erro indefinido. \n");
+            if (!achou){
+                switch (opcao) {
+                    case 1 -> // Erro func
+                         System.out.println("\n ---- Nenhum funcionário encontrado com os dados informados \n");
+                    case 0 -> // Erro user
+                        System.out.println("\n ---- Nenhum usuário encontrado com os dados informados \n");
+                    default -> System.out.println("\n Erro indefinido. \n");
+                }
+
             }
         }
         
@@ -170,7 +180,7 @@ public class Cliente {
 //          Método de listar livros
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    public void consultarLivros(){
+    public static void consultarLivros(){
         System.out.println("""
                            Escolha o tipo de consulta:
                            
@@ -184,9 +194,7 @@ public class Cliente {
 
         switch (opcao){
             case 1:
-                for (Estante estante : Estante.estantes){
-                    estante.listarLivrosGeral();
-                }
+                Estante.listarLivrosGeral();
             case 2:
                 System.out.print("Nome do autor: ");
                 String nomeAutor = input.nextLine();
@@ -226,7 +234,7 @@ public class Cliente {
     //    Método de listagem de estantes
     // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    public void consultarEstantes(){
+    public static void consultarEstantes(){
         System.out.println("""
             Escolha o tipo de consulta:
 

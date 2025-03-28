@@ -44,11 +44,11 @@ public class Funcionario extends Cliente {
     }
 
     // Adicionar usuário
-    public void adicionarUsuario(String nome, String senha, String email, String endereco) {
-        Usuario usuario = new Usuario(nome, senha, email, endereco);
-        Cliente.loginsU.add(new Cliente.Login(email, senha));
-        Cliente.loginsUser.put(usuario, new Cliente.Login(email, senha));
-        System.out.println("Usuário adicionado com sucesso: " + nome);
+    public void adicionarUsuario() {
+        System.out.println("0 - Usuário\n1 - Funcionário");
+        int opcao = input.nextInt();
+        cadastro(opcao);
+
     }
 
     // Remover usuário
